@@ -35,20 +35,7 @@ function enableAction() {
 	buttonReport.disabled = false;
 }
 
-document.addEventListener('DOMContentLoaded', function(e) {
-	console.log(document.getElementsByClassName('table-container').offsetTop);
-	buttonPlace.addEventListener('click', function(){
-		var placeX= parseInt(document.getElementById("placeX").value);
-		var placeY= parseInt(document.getElementById("placeY").value);
-		var placeF = document.getElementById("placeF").value;
-		intialPosition(placeX, placeY, placeF);
-		enableAction();
-	});
-
-	document.addEventListener('click', function() {
-		updateOutput();
-	});
-
+function buttonMoveAction() {
 	buttonMove.addEventListener('click', function(e) {
 		if(direction === "EAST") {
 			if(leftPosition < 425) {
@@ -95,7 +82,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 			}
 		}
 	});
+}
 
+function buttonDirectionRight() {
 	buttonRight.addEventListener('click', function() {
 		if(direction === "EAST") direction = "SOUTH";
 		else if(direction === "SOUTH") direction = "WEST";
@@ -103,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 		else if(direction === "NORTH") direction = "EAST";
 		robot.innerHTML = direction;
 	});
+}
 
+function buttonDirectionLeft(){
 	buttonLeft.addEventListener('click', function() {
 		if(direction === "EAST") direction = "NORTH";
 		else if(direction === "NORTH") direction = "WEST";
@@ -111,8 +102,34 @@ document.addEventListener('DOMContentLoaded', function(e) {
 		else if(direction === "SOUTH") direction = "EAST";
 		robot.innerHTML = direction;
 	});
+}
 
+function buttonReportAction(){
 	buttonReport.addEventListener('click', function() {
 		output.classList.toggle('hidden');
 	});
+}
+
+document.addEventListener('DOMContentLoaded', function(e) {
+	//console.log(document.getElementsByClassName('table-container').offsetTop);
+	buttonPlace.addEventListener('click', function(){
+		var placeX= parseInt(document.getElementById("placeX").value);
+		var placeY= parseInt(document.getElementById("placeY").value);
+		var placeF = document.getElementById("placeF").value;
+		intialPosition(placeX, placeY, placeF);
+		enableAction();
+	});
+
+	document.addEventListener('click', function() {
+		updateOutput();
+	});
+
+	buttonMoveAction();
+
+	buttonDirectionRight();
+
+	buttonDirectionLeft();
+	
+	buttonReportAction();
+	
 })
